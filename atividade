@@ -1,0 +1,266 @@
+
+#include <iostream>
+#include <string>
+#include <vector>
+
+class Data
+{
+private:
+    int dia;
+    int mes;
+    int ano;
+
+public:
+    // Construtor da classe Data
+    Data() {}
+    // Métodos de acesso
+    int getDia() { return dia; }
+    int getMes() { return mes; }
+    int getAno() { return ano; }
+    void setDia(int dia) { this->dia = dia; }
+    void setMes(int mes) { this->mes = mes; }
+    void setAno(int ano) { this->ano = ano; }
+    // Método para exibir a data no formato dd/mm/aaaa
+    void exibirData()
+    {
+        std::cout << dia << "/" << mes << "/" << ano;
+    };
+};
+class Pessoa
+{
+private:
+    int matricula;
+    std::string nome;
+    std::string email;
+
+public:
+    int getMatricula()
+    {
+        return matricula;
+    }
+
+    void setMatricula(int matricula)
+    {
+        this->matricula = matricula;
+    }
+
+    std::string getNome()
+    {
+        return nome;
+    }
+
+    void setNome(std::string nome)
+    {
+        this->nome = nome;
+    }
+
+    std::string getEmail()
+    {
+        return email;
+    }
+
+    void setEmail(std::string email)
+    {
+        this->email = email;
+    }
+};
+
+class Professor : public Pessoa
+{
+private:
+    std::string titulacao;
+    std::string linhaPesquisa;
+
+public:
+    std::string getTitulacao()
+    {
+        return titulacao;
+    }
+
+    void setTitulacao(std::string titulacao)
+    {
+        this->titulacao = titulacao;
+    }
+
+    std::string LinhaPesquisa()
+    {
+        return linhaPesquisa;
+    }
+
+    void setLinhaPesquisa(std::string linhaPesquisa)
+    {
+        this->linhaPesquisa = linhaPesquisa;
+    }
+};
+class areaAtuacao{
+    private:
+    std::string descricao;
+
+    public:
+    std::string getDescricao()
+    {
+        return descricao;
+    }
+    void setDescricao(int descricao)
+    {
+        this->descricao = descricao;
+    }
+};
+
+class Aluno : public Pessoa
+{
+private:
+    std::string turma;
+
+public:
+    std::string getTurma()
+    {
+        return turma;
+    }
+
+    void setTurma(std::string turma)
+    {
+        this->turma = turma;
+    }
+};
+
+class TrabalhoDeConclusao{
+    private:
+    int ano;
+    int semestre;
+    Data prazo;
+    std::string parecer;
+
+    public:
+    int getAno()
+    {
+        return ano;
+    }
+    void setAno(int ano)
+    {
+        this->ano = ano;
+    }
+    
+    int getSemestre()
+    {
+        return semestre;
+    }
+    void setSemestre(int semestre)
+    {
+        this->semestre = semestre;
+    }
+    
+    std::string getParecer()
+    {
+        return parecer;
+    }
+    void setParecer(int parecer)
+    {
+        this->parecer = parecer;
+    }
+
+    Data getPrazo()
+    {
+        return prazo;
+    }
+    void setPrazo(const Data &prazo)
+    {
+        this->prazo = prazo;
+    }
+
+};
+int main()
+{
+    int menu, a = 0;
+    std::vector<Professor> vectorProfessor;  // 
+    std::vector<Aluno> vectorAluno;  // 
+    while (a == 0)
+    {
+        std::cout << "Escolha uma opção:\n";
+        std::cout << "1. Cadastrar Aluno\n";
+        std::cout << "2. Cadastrar Professor\n";
+        std::cout << "3. Cadastrar Trabalho de Conclusao\n";
+        std::cin >> menu;
+        fflush(stdin);
+
+        std::string euMudoTodaHora;
+        int euMudoTodaHoraInt;
+
+        {
+            switch (menu)
+            {
+            case 1:
+            {
+                // principal aluno ↓
+                Aluno aluno1;
+                std::cout << "sua turma: ";
+                getline(std::cin, euMudoTodaHora);
+                aluno1.setTurma(euMudoTodaHora);
+                // pessoa ↓
+                std::cout << "seu nome: ";
+                getline(std::cin, euMudoTodaHora);
+                aluno1.setNome(euMudoTodaHora);
+
+                std::cout << "seu email: ";
+                getline(std::cin, euMudoTodaHora);
+                aluno1.setEmail(euMudoTodaHora);
+
+                std::cout << "sua matricula: ";
+                std::cin >> euMudoTodaHoraInt;
+                aluno1.setMatricula(euMudoTodaHoraInt);
+
+                vectorAluno.push_back(aluno1); // armazenar no vetor
+                break;
+            }
+            case 2:
+            {
+                // principal Professor ↓
+                Professor professor1;
+                std::cout << "sua titulacao: ";
+                getline(std::cin, euMudoTodaHora);
+                professor1.setTitulacao(euMudoTodaHora);
+
+                std::cout << "sua linha de pesquisa: ";
+                getline(std::cin, euMudoTodaHora);
+                professor1.setLinhaPesquisa(euMudoTodaHora);
+
+                // pessoa ↓
+                std::cout << "seu nome: ";
+                getline(std::cin, euMudoTodaHora);
+                professor1.setNome(euMudoTodaHora);
+
+                std::cout << "seu email: ";
+                getline(std::cin, euMudoTodaHora);
+                professor1.setEmail(euMudoTodaHora);
+
+                std::cout << "sua matricula: ";
+                std::cin >> euMudoTodaHora;
+                professor1.setMatricula(euMudoTodaHoraInt);
+
+                vectorProfessor.push_back(professor1); // armazenar no vetor
+
+                break;
+            }
+
+            case 3: {
+                if (vectorAluno.empty() || vectorProfessor.empty()) {
+                    std::cout << "Erro: É necessário cadastrar pelo menos um aluno e um professor para criar um TCC.\n";
+                } else {
+
+                break;
+                }
+            }
+
+            default:
+                std::cout << "Opção inválida.\n";
+            }
+            fflush(stdin);
+
+            std::cout << "Voltar? Digite 0 para sim ou 1 para sair: ";
+            std::cin >> a;
+            std::cin.ignore(); // Limpa o buffer de entrada
+        }
+    }
+
+    return 0;
+}
